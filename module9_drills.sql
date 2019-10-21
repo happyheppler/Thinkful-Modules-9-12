@@ -139,4 +139,4 @@ WHERE
 --for any characters after the “X”!
 SELECT *
 FROM vehicles
-WHERE model LIKE('__X%');
+WHERE model LIKE '__X%';
