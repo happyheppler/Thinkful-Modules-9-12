@@ -55,26 +55,29 @@ WHERE year IN(1987,
 --2005, exclusive of the years 1990 and 2000. ANS: 17,235.
 SELECT COUNT(*)
 FROM vehicles
-WHERE year BETWEEN 1987 AND 2005
-AND NOT year IN(1990, 2000);
+WHERE
+	year BETWEEN 1987 AND 2005
+	AND year NOT IN(1990, 2000);
 
 --Write a query that returns the year, make, model, and a field called
 --average_mpg that calculates the average highway/city fuel consumption.
 --(If hwy is 24 and cty is 20, then average_mpg = (24 + 20)/ 2 = 22.)
-SELECT year,make, model, (hwy + cty) / 2 AS average_mpg
+SELECT year, make, model, (hwy + cty) / 2 AS average_mpg
 FROM vehicles;
 
 --Write a query that returns the year, make, model, and a text field
 --displaying “X highway; Y city.” (For example, if hwy is 24 and cty
 --is 20, then hwy_city is “24 highway; 20 city.”)
-SELECT year, make, model, CONCAT(hwy, ' highway; ', cty, ' city') AS hwy_city
+SELECT year, make, model, CONCAT(hwy, ' highway; ', cty, ' city;') AS hwy_city
 FROM vehicles;
 
 --Write a query that returns the id, make, model, and year for all records
 --that have NULL for either the cyl or displ fields.
 SELECT id, make, model, year
 FROM vehicles
-WHERE cyl IS NULL OR displ IS NULL;
+WHERE
+	cyl IS NULL
+	OR displ IS NULL;
 
 --Write a query that returns all fields for records with rear-wheel
 --drive and diesel vehicles since 2000, inclusive. Also sort by year
@@ -84,14 +87,19 @@ WHERE cyl IS NULL OR displ IS NULL;
 --in that field, or use SELECT DISTINCT(fuel) FROM vehicles;.
 SELECT *
 FROM vehicles
-WHERE drive = 'Rear-Wheel Drive' AND fuel = 'Diesel' AND year >= 2000
+WHERE
+	drive = 'Rear-Wheel Drive'
+	AND fuel = 'Diesel'
+	AND year >= 2000
 ORDER BY year DESC, hwy DESC;
 
 --Write a query that counts the number of vehicles that are either Fords
 --or Chevrolets and either compact cars or 2-seaters. ANS: 612.
 SELECT COUNT(*)
 FROM vehicles
-WHERE (make = 'Ford' OR make = 'Chevrolet') AND (class = 'Compact Cars' OR class = 'Two Seaters');
+WHERE
+	(make = 'Ford' OR make = 'Chevrolet')
+	AND (class = 'Compact Cars' OR class = 'Two Seaters');
 
 --Write a query that returns the records for 10 vehicles with the highest highway fuel mileage.
 SELECT *
@@ -105,7 +113,9 @@ LIMIT 10;
 --Capital X returns 456 records. Lowercase x returns 40 different records.
 SELECT *
 FROM vehicles
-WHERE year > 2000 AND model LIKE 'X%'
+WHERE
+	year >= 2000
+	AND model LIKE 'X%'
 ORDER BY make ASC;
 
 --Write a query that returns the count of records where the “cyl” field
@@ -119,7 +129,10 @@ WHERE cyl IS NULL;
 --(“displ” field). ANS: 1964.
 SELECT COUNT(*)
 FROM vehicles
-WHERE year < 2000 AND hwy > 20 AND displ > 3;
+WHERE
+	year < 2000
+	AND hwy > 20
+	AND displ > 3;
 
 --Write a query that returns all records whose model name has a (capital)
 --X in its 3rd position. Hint: make sure your wildcard operator accommodates
