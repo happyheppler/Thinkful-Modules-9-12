@@ -22,7 +22,8 @@ ORDER BY main_category;
 --How many unique categories are in each main_category?
 SELECT main_category, COUNT(DISTINCT category)
 FROM ksprojects
-GROUP BY main_category;
+GROUP BY main_category
+ORDER BY main_category;
 
 --Write a query that returns the average number of backers per main_category,
 --rounded to the nearest whole number and sorted from high to low.
@@ -57,11 +58,11 @@ GROUP BY main_category;
 --by NULL is not possible, so use NULLIF to replace NULLs with 0 in the average calculation.
 SELECT
 	category,
-	SUM(usd_pledged) / SUM(NULLIF(backers, 0)) AS average_usd_per_backer
+	AVG(usd_pledged/NULLIF(backers,0)) as avg_usd_per_backer
 FROM ksprojects
 GROUP BY category
-HAVING SUM(usd_pledged) / SUM(NULLIF(backers, 0)) < 50
-ORDER BY average_usd_per_backer DESC;
+HAVING AVG(usd_pledged/NULLIF(backers,0)) < 50
+ORDER BY avg_usd_per_backer DESC;
 
 --Write a query that shows, for each main_category, how many successful projects had
 --between 5 and 10 backers.
