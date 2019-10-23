@@ -8,7 +8,9 @@ FROM vehicles;
 
 --Write a query that returns the id, make, and model fields for all the
 --the records for 2010 vehicles
-SELECT id, make, model
+SELECT id,
+	make,
+	model
 FROM vehicles
 WHERE year = 2010;
 
@@ -39,18 +41,27 @@ WHERE year BETWEEN 1987 AND 2005
 --Write a query that returns the year, make, model, and a field called
 --average_mpg that calculates the average highway/city fuel consumption.
 --(If hwy is 24 and cty is 20, then average_mpg = (24 + 20)/ 2 = 22.)
-SELECT year, make, model, (hwy + cty) / 2 AS average_mpg
+SELECT year,
+	make,
+	model,
+	(hwy + cty) / 2 AS average_mpg
 FROM vehicles;
 
 --Write a query that returns the year, make, model, and a text field
 --displaying “X highway; Y city.” (For example, if hwy is 24 and cty
 --is 20, then hwy_city is “24 highway; 20 city.”)
-SELECT year, make, model, CONCAT(hwy, ' highway; ', cty, ' city;') AS hwy_city
+SELECT year,
+	make,
+	model,
+	CONCAT(hwy, ' highway; ', cty, ' city;') AS hwy_city
 FROM vehicles;
 
 --Write a query that returns the id, make, model, and year for all records
 --that have NULL for either the cyl or displ fields.
-SELECT id, make, model, year
+SELECT id,
+	make,
+	model,
+	year
 FROM vehicles
 WHERE cyl IS NULL
 	OR displ IS NULL;
