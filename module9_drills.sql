@@ -33,30 +33,7 @@ WHERE year IN(1990, 2000, 2010);
 --2005, exclusive of the years 1990 and 2000. ANS: 17,235.
 SELECT COUNT(*)
 FROM vehicles
-WHERE year IN(1987,
-			  1988,
-			  1989,
-			  1991,
-			  1992,
-			  1993,
-			  1994,
-			  1995,
-			  1996,
-			  1997,
-			  1998,
-			  1999,
-			  2001,
-			  2002,
-			  2003,
-			  2004,
-			  2005);
-			  
---Write a query that returns the count of all records between 1987 and
---2005, exclusive of the years 1990 and 2000. ANS: 17,235.
-SELECT COUNT(*)
-FROM vehicles
-WHERE
-	year BETWEEN 1987 AND 2005
+WHERE year BETWEEN 1987 AND 2005
 	AND year NOT IN(1990, 2000);
 
 --Write a query that returns the year, make, model, and a field called
@@ -75,8 +52,7 @@ FROM vehicles;
 --that have NULL for either the cyl or displ fields.
 SELECT id, make, model, year
 FROM vehicles
-WHERE
-	cyl IS NULL
+WHERE cyl IS NULL
 	OR displ IS NULL;
 
 --Write a query that returns all fields for records with rear-wheel
@@ -87,8 +63,7 @@ WHERE
 --in that field, or use SELECT DISTINCT(fuel) FROM vehicles;.
 SELECT *
 FROM vehicles
-WHERE
-	drive = 'Rear-Wheel Drive'
+WHERE drive = 'Rear-Wheel Drive'
 	AND fuel = 'Diesel'
 	AND year >= 2000
 ORDER BY year DESC, hwy DESC;
@@ -97,8 +72,7 @@ ORDER BY year DESC, hwy DESC;
 --or Chevrolets and either compact cars or 2-seaters. ANS: 612.
 SELECT COUNT(*)
 FROM vehicles
-WHERE
-	(make = 'Ford' OR make = 'Chevrolet')
+WHERE (make = 'Ford' OR make = 'Chevrolet')
 	AND (class = 'Compact Cars' OR class = 'Two Seaters');
 
 --Write a query that returns the records for 10 vehicles with the highest highway fuel mileage.
@@ -113,8 +87,7 @@ LIMIT 10;
 --Capital X returns 456 records. Lowercase x returns 40 different records.
 SELECT *
 FROM vehicles
-WHERE
-	year >= 2000
+WHERE year >= 2000
 	AND model LIKE 'X%'
 ORDER BY make ASC;
 
@@ -129,8 +102,7 @@ WHERE cyl IS NULL;
 --(“displ” field). ANS: 1964.
 SELECT COUNT(*)
 FROM vehicles
-WHERE
-	year < 2000
+WHERE year < 2000
 	AND hwy > 20
 	AND displ > 3;
 

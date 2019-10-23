@@ -8,8 +8,7 @@ FROM ksprojects;
 
 --How many unique values are there for the main_category field? ANS: 15.
 --What about for the category field? ANS: 158.
-SELECT
-	COUNT(DISTINCT main_category) AS num_main_cat,
+SELECT COUNT(DISTINCT main_category) AS num_main_cat,
 	COUNT(DISTINCT category) AS num_cat
 FROM ksprojects;
 
@@ -34,8 +33,7 @@ ORDER BY avg_backers DESC;
 
 --Write a query that shows, for each category, how many campaigns were successful
 --and the average difference per project between dollars pledged and the goal.
-SELECT
-	category,
+SELECT category,
 	COUNT(*) AS num_successful,
 	AVG(usd_pledged - goal) AS avg_diff
 FROM ksprojects
@@ -45,8 +43,7 @@ GROUP BY category;
 --Write a query that shows, for each main category, how many projects had zero
 --backers for that category and the largest goal amount for that category
 --(also for projects with zero backers).
-SELECT
-	main_category,
+SELECT main_category,
 	COUNT(*) AS count_projects,
 	MAX(goal) AS max_goal
 FROM ksprojects
@@ -56,8 +53,7 @@ GROUP BY main_category;
 --For each category, find the average USD per backer, and return only those results
 --for which the average USD per backer is < $50, sorted high to low. Hint: Division
 --by NULL is not possible, so use NULLIF to replace NULLs with 0 in the average calculation.
-SELECT
-	category,
+SELECT category,
 	AVG(usd_pledged/NULLIF(backers,0)) as avg_usd_per_backer
 FROM ksprojects
 GROUP BY category
@@ -68,7 +64,8 @@ ORDER BY avg_usd_per_backer DESC;
 --between 5 and 10 backers.
 SELECT main_category, COUNT(*) AS count_projects
 FROM ksprojects
-WHERE state = 'successful' AND backers BETWEEN 5 AND 10
+WHERE state = 'successful'
+	AND backers BETWEEN 5 AND 10
 GROUP BY main_category;
 
 --Get a total of the amount ‘pledged’ for each type of currency grouped by its respective
@@ -83,7 +80,8 @@ ORDER BY total_pledged DESC;
 --100,000. Sort by main_category from A to Z.
 SELECT main_category, SUM(backers) AS total_backers
 FROM ksprojects
-WHERE main_category NOT IN('Games', 'Technology') AND state = 'successful'
+WHERE main_category NOT IN('Games', 'Technology')
+	AND state = 'successful'
 GROUP BY main_category
 HAVING SUM(backers) > 100000
 ORDER BY main_category;
